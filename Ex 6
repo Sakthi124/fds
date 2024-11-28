@@ -1,0 +1,200 @@
+EX 6
+
+import numpy as np
+
+import pandas as pd
+
+import matplotlib.pyplot as plt
+
+import seaborn as sns
+
+sns.set(color_codes=True)
+
+%matplotlib inline
+
+import warnings
+
+warnings.filterwarnings("ignore")
+
+diabetes = pd.read_csv("diabetes.csv")
+
+diabetes.describe()
+
+sns.kdeplot(diabetes["Pregnancies"],color="green",shade=True)
+
+plt.show()
+
+plt.figure()
+
+sns.kdeplot(diabetes["Glucose"],color="green",shade=True)
+
+plt.show()
+
+# Plot the KDE
+
+sns.kdeplot(x=diabetes["Age"], y=diabetes["BloodPressure"], cmap='RdYlBu', shade=True)
+
+plt.show()
+
+# Plot the KDE
+
+sns.kdeplot(x=diabetes.Age, y=diabetes.Glucose, cmap='PRGn', shade=True,bw_adjust=1)
+
+plt.show()
+
+#claculate the correlation
+
+corr=diabetes.corr()
+
+#display the correlation
+
+print(corr)
+
+import seaborn as sns
+
+sns.scatterplot(x="Pregnancies",y="Glucose",data=corr);
+
+plt.show()
+
+sns.lmplot(x="Pregnancies",y="Glucose",hue="Outcome",data=corr);
+
+sns.lmplot(x="Pregnancies",y="Glucose",hue="Outcome",data=corr )
+
+# Create a Seaborn plot
+
+sns.displot(diabetes["Age"], color="green", height=3, aspect=1.5)
+
+plt.show()
+
+sns.kdeplot(diabetes[diabetes.Outcome==0]["Age"],color="blue")
+
+sns.kdeplot(diabetes[diabetes.Outcome==1]["Age"],color="orange",shade=True)
+
+plt.show()
+
+#split the data based on the Outcome
+
+dia1 = diabetes[diabetes.Outcome == 1]
+
+dia0 = diabetes[diabetes.Outcome == 0]
+
+plt.figure(figsize=(10, 10))
+
+plt.subplot(1, 3, 1)
+
+plt.title("Histogram for Glucose")
+
+sns.histplot(diabetes['Glucose'], kde=False)
+
+plt.subplot(1, 3, 2)
+
+sns.histplot(dia0['Glucose'], kde=False, color="Gold", label="Glucose for Outcome=0")
+
+sns.histplot(dia1['Glucose'], kde=False, color="Blue", label="Glucose for Outcome=1")
+
+plt.title("Histogram for Glucose by Outcome")
+
+plt.legend()
+
+plt.subplot(1, 3, 3)
+
+sns.boxplot(x=diabetes['Outcome'], y=diabetes['Glucose'])
+
+plt.title("Boxplot for Glucose by Outcome")
+
+plt.show()
+
+# Three-dimensional plotting
+
+import numpy as np
+import pandas as pd
+
+from mpl_toolkits.mplot3d import Axes3D # Fix the import statement
+
+import matplotlib.pyplot as plt
+
+import matplotlib
+
+import functools
+
+import plotly.express as px # Fix the import statement
+
+import plotly.graph_objects as go
+
+%matplotlib inline
+
+import warnings
+
+warnings.filterwarnings("ignore")
+
+diabetes=pd.read_csv("diabetes.csv")
+
+diabetes.describe()
+
+import numpy as np
+
+import pandas as pd
+
+import matplotlib.pyplot as plt
+
+# Assuming 'diabetes' is a DataFrame with columns 'Age' and 'Glucose' # If not, you need to replace it with your actual DataFrame name. x = diabetes.Age[:20]
+
+y = diabetes.Glucose[:20]
+
+def f(x, y):
+
+return np.sin(np.sqrt(x**2 + y**2))
+
+x_line = np.linspace(-6, 6, 30)
+
+y_line = np.linspace(-6, 6, 30)
+
+X, Y = np.meshgrid(x_line, y_line)
+
+Z = f(X, Y)
+
+fig = plt.figure(figsize=(6, 6))
+
+ax = plt.axes(projection='3d')
+
+ax.contour3D(X, Y, Z, 50, cmap='binary')
+
+ax.set_xlabel('Age')
+
+ax.set_ylabel('Glucose')
+
+ax.set_zlabel('z')
+
+plt.show()
+
+fig = plt.figure(figsize=(6, 6))
+
+ax = plt.axes(projection='3d')
+
+ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+
+ax.set_title('surface')
+
+ax.set_xlabel('Age')
+
+ax.set_ylabel('Glucose')
+
+ax.set_zlabel('z')
+
+plt.show()
+
+fig = plt.figure(figsize=(6, 6))
+
+ax = plt.axes(projection='3d')
+
+ax.scatter(X, Y, Z, cmap='viridis', linewidth=0.5);
+
+ax.set_title('scatter')
+
+ax.set_xlabel('Age')
+
+ax.set_ylabel('Glucose')
+
+ax.set_zlabel('z')
+
+plt.show()
