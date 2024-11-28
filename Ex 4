@@ -1,0 +1,51 @@
+import pandas as pd
+
+df=pd.read_csv("Iris.csv")
+
+print(df)
+
+print(df.dtypes)
+
+print(df.head())
+
+print(df.shape)
+
+df.info()
+
+df.describe()
+
+df.isnull().sum()
+
+data = df.drop_duplicates(subset="Species")
+
+df.value_counts("Species")
+
+import matplotlib.pyplot as plt
+
+import seaborn as sns
+
+plt.scatter(df.index,df['SepalWidthCm'])
+
+plt.show()
+
+sns.scatterplot(x=df.index,y=df['SepalWidthCm'],hue=df['Species'])
+
+plt.title("Line plot for petal length")
+
+plt.xlabel('Index', fontsize=20)
+
+plt.ylabel('PetalLengthCm', fontsize=20)
+
+for name, group in df.groupby('Species')
+
+plt.plot(group.index, group['PetalLengthCm'], label=name, markevery=1,marker='d')
+
+plt.legend()
+
+plt.show()
+
+plt.hist(df['PetalWidthCm'])
+
+plt.show()
+
+sns.displot(df["PetalWidthCm"],kde=False,color="RED",bins=10)
