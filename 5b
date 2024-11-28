@@ -1,0 +1,137 @@
+import matplotlib.pyplot as plt
+
+import numpy as np
+
+from sklearn import datasets, linear_model
+
+from sklearn.metrics import mean_squared_error, r2_score
+
+# Load the diabetes dataset
+
+diabetes = datasets.load_diabetes()
+
+diabetes_x = diabetes.data[:, np.newaxis, 2] # Use only one feature (the third one)
+
+diabetes_y = diabetes.target
+
+# Split the data into training/testing sets
+
+diabetes_x_train = diabetes_x[:-50]
+
+diabetes_x_test = diabetes_x[-50:]
+
+# Split the targets into training/testing sets
+
+diabetes_y_train = diabetes_y[:-50]
+
+diabetes_y_test = diabetes_y[-50:]
+
+# Create linear regression object
+
+regr = linear_model.LinearRegression()
+
+# Train the model using the training sets
+
+regr.fit(diabetes_x_train, diabetes_y_train)
+
+# Make predictions using the testing set
+
+diabetes_y_pred = regr.predict(diabetes_x_test)
+
+# The coefficients
+
+print('Coefficients: \n', regr.coef_)
+
+# The mean squared error
+
+print('Mean squared error: %.2f'% mean_squared_error(diabetes_y_test, diabetes_y_pred))
+
+# The coefficient of determination: 1 is perfect prediction
+
+print('Coefficient of determination: %.2f'% r2_score(diabetes_y_test, diabetes_y_pred))
+
+# Plot outputs
+
+plt.scatter(diabetes_x_test, diabetes_y_test, color='black')
+
+plt.plot(diabetes_x_test, diabetes_y_pred, color='blue', linewidth=3)
+
+plt.xticks(())
+
+plt.yticks(())
+
+plt.show()
+import numpy as np
+
+import pandas as pd
+
+from sklearn.linear_model import LogisticRegression
+
+from sklearn.model_selection import train_test_split
+
+import seaborn as sns
+
+import matplotlib.pyplot as plt
+
+from sklearn import metrics
+
+import warnings
+
+warnings.filterwarnings("ignore")
+
+diabetes=pd.read_csv("diabetes.csv")
+
+print(diabetes)
+
+import pandas as pd
+
+from sklearn.model_selection import train_test_split
+
+from sklearn.linear_model import LogisticRegression
+
+from sklearn import metrics
+
+# Assuming df is your DataFrame
+
+df = pd.read_csv('diabetes.csv')
+
+# Separate the features (x) and target variable (y)
+
+x = df.drop("Outcome", axis=1)
+
+y = df["Outcome"]
+
+# Split the dataset into training and test sets
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25, random_state=0)
+
+# Create a logistic regression model
+
+model = LogisticRegression()
+
+# Train the model on the training set
+
+model.fit(x_train, y_train)
+
+# Make predictions on the test set
+
+y_pred = model.predict(x_test)
+
+# Print evaluation metrics
+
+print("Accuracy for the test set is {:.4f}".format(metrics.accuracy_score(y_test, y_pred)))
+
+print("Precision for the test set is {:.4f}".format(metrics.precision_score(y_test, y_pred)))
+
+print("Recall for the test set is {:.4f}".format(metrics.recall_score(y_test, y_pred)))
+
+print(metrics.classification_report(y_test,y_pred))
+
+#visulalization
+
+f,ax=plt.subplots(figsize=(8,6))
+
+sns.heatmap(df.corr(),cmap="GnBu",annot=True,linewidths=0.5,fmt='.1f',ax=ax)
+
+plt.show()
+
