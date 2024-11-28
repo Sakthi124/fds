@@ -1,0 +1,98 @@
+import numpy as np
+
+import pandas as pd
+
+import seaborn as sns
+
+import matplotlib.pyplot as plt
+
+%matplotlib inline
+
+datadf = pd.read_csv("/content/diabetes.csv")
+
+print(datadf.tail(10))
+
+print(datadf.head(10))
+
+print(datadf.shape)
+
+print(datadf.size)
+
+print(datadf.info())
+
+print(datadf.isnull().values.any())
+
+print(datadf.iloc[: , 0 : 8].describe().applymap(lambda x: '%.0f' % x))
+
+sns.displot(datadf['BloodPressure'], kind = 'kde')
+
+plt.show()
+
+m1 = datadf['BMI'].mean() # mean
+
+print(m1)
+
+m2 = datadf['BMI'].median() # median
+
+print(m2)
+
+m3 = datadf['BMI'].mode()[0] # mode
+
+print(m3)
+
+#Pregnancies
+
+import matplotlib.pyplot as plt
+
+import seaborn as sns
+
+plt.figure(figsize=(10,6))
+
+sns.countplot(x=datadf.Pregnancies,palette="pastel").set_title('No. of Pregnacies')
+
+plt.xlabel("Pregnancy count")
+plt.ylabel("Total count")
+
+plt.show()
+
+sns.histplot(x=datadf.Age).set_title("Histograph of Age")
+
+plt.show()
+
+print(datadf.Outcome.value_counts())
+
+print(datadf.Outcome.value_counts()/len(datadf))
+
+sns.countplot(x=datadf.Outcome).set_title("BarPlot on Outcome")
+
+plt.show()
+
+fig, axes = plt.subplots(2, 2, sharey=False,figsize=(18, 10))
+
+fig.suptitle('Distribution of Continuous Variable of data')
+
+sns.histplot(ax=axes[0, 0], x=datadf.Glucose)
+
+sns.histplot(ax=axes[0, 1], x=datadf.BloodPressure)
+
+sns.histplot(ax=axes[1, 0], x=datadf.BMI)
+
+sns.histplot(ax=axes[1, 1], x=datadf.DiabetesPedigreeFunction)
+
+plt.show()
+
+print(datadf.loc[:,datadf.columns != 'Outcome'].skew(axis = 0, skipna = True))
+
+fig, axes = plt.subplots(2, 2, sharey=False,figsize=(18, 10))
+
+fig.suptitle('BoxPlot Continuous Variable of data')
+
+sns.boxplot(ax=axes[0, 0], x=datadf.Glucose)
+
+sns.boxplot(ax=axes[0, 1], x=datadf.BloodPressure)
+
+sns.boxplot(ax=axes[1, 0], x=datadf.BMI)
+
+sns.boxplot(ax=axes[1, 1], x=datadf.DiabetesPedigreeFunction)
+
+plt.show()
